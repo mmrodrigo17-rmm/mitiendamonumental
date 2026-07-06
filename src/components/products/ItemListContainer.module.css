@@ -1,0 +1,15 @@
+/* === Catálogo === */
+.catalogContainer {
+  padding: 1rem 0;
+}
+
+.loadingContainer {
+  text-align: center;
+  padding: 3rem;
+}
+
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Colección de productos — solo admins pueden escribir, todos pueden leer
+    match /productos/{producto} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'admin@gmail.com';
+    }
+
+    // Colección de transacciones — usuarios autenticados pueden crear, admins pueden leer todo
+    match /transacciones/{transaccion} {
+      allow read: if request.auth != null && request.auth.token.email == 'admin@gmail.com';
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if request.auth != null && request.auth.token.email == 'admin@gmail.com';
+    }
+
+    // Colección de opiniones — todos pueden leer, usuarios autenticados pueden crear, solo admin modifica
+    match /opiniones/{opinion} {
+      allow read: if true;
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.productoId is string;
+      allow update, delete: if request.auth != null && request.auth.token.email == 'admin@gmail.com';
+    }
+  }
+}
