@@ -254,7 +254,7 @@ service cloud.firestore {
 
 | Rol | Email | Contraseña |
 |-----|-------|------------|
-| **Administrador** | `admin@gmail.com` | `1234` |
+| **Administrador** | `admin@gmail.com` | `123456` |
 | **Usuario común** | (cualquier email) | (la que elijas al registrarte) |
 
 > El admin se determina por `VITE_ADMIN_EMAIL` en el `.env`. En el `.env.example` y en este ejemplo de documentación se usa `admin@gmail.com`.
